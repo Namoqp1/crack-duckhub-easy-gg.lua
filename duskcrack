@@ -1,21 +1,10 @@
 local DuskHub = tostring(game.PlaceId)
-
-if DuskHub == "8534845015" then
-    SS = true
-elseif DuskHub == "7622046644" then
-    MG = true
-elseif DuskHub == "3101667897" then
-    LS  = true
-elseif DuskHub == "3351674303" then
-    DE = true
-elseif DuskHub == "17545130379" then
-    RS = true
-elseif DuskHub == "15694107053" then
-    JU = true
-elseif DuskHub == "17889317592" then
-    JUD = true
-elseif DuskHub == "17167990958" then
+if DuskHub == "17167990958" then
     RF = true
+elseif DuskHub == "16281300371" then
+    BB = true
+elseif DuskHub == "17545130379" then
+    RY = true
 elseif DuskHub == "10260193230" then
     MM = true
 end
@@ -44,14 +33,39 @@ end)
 UICorner.Parent = ImageButton1
 
 
-if RF then 
+if RF then
+local Fluent = loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucas-Lua/ui/main/m"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/barlossxi/barlossxi/main/ZAZA.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/barlossxi/barlossxi/main/InterfaceManager.lua.txt"))()
+
+local ScreenGui1 = Instance.new("ScreenGui")
+local ImageButton1 = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+
+ScreenGui1.Name = "ImageButton"
+ScreenGui1.Parent = game.CoreGui
+ScreenGui1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageButton1.Parent = ScreenGui1
+ImageButton1.BackgroundTransparency = 1
+ImageButton1.BorderSizePixel = 0
+ImageButton1.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
+ImageButton1.Size = UDim2.new(0, 50, 0, 50)
+ImageButton1.Draggable = true
+ImageButton1.Image = "rbxassetid://18573206393"
+ImageButton1.MouseButton1Down:Connect(function()
+  game:GetService("VirtualInputManager"):SendKeyEvent(true,305,false,game)
+  game:GetService("VirtualInputManager"):SendKeyEvent(false,305,false,game)
+end)
+UICorner.Parent = ImageButton1
+
 local Window = Fluent:CreateWindow({
 	Title = "Rock Fruit Ultimate Script",
-	SubTitle = "By > Dazzle Hub",
+	SubTitle = "By > Dazzle Hub ",
 	TabWidth = 130,
 	Size = UDim2.fromOffset(480, 400),
 	Acrylic = false, 
-	Theme = "Crimson",
+	Theme = "Dark",
 	MinimizeKey = Enum.KeyCode.RightControl
 })
 
@@ -350,7 +364,7 @@ function TP(CFrame)
         if humanoidRootPart then
             humanoidRootPart.CFrame = CFrame
         else
-            wait(2)
+            wait(1)
         end
     end)
 end
@@ -387,9 +401,9 @@ spawn(function()
     while wait(0.10) do
         if _G.ACgaa then
           pcall(function()
-                for i = 1,5 do
+                for i = 1,30 do
       fireclickdetector(game.Workspace.Delta.Part.ClickDetector)
-      TP(game.Workspace.Delta.Part.CFrame)
+      TP(game.Workspace.Delta.Part)
                 end
             end)
         end
@@ -409,9 +423,9 @@ spawn(function()
     while wait(0.10) do
         if _G.Hak then
           pcall(function()
-                for i = 1,5 do
+                for i = 1,30 do
       fireclickdetector(game.Workspace.Rock.Part.ClickDetector)
-      TP(game.Workspace.Rock.Part.CFrame)
+      TP(game.Workspace.Rock.Part)
                 end
             end)
         end
@@ -419,81 +433,102 @@ spawn(function()
 end)
 
 
-Tabs.Event:AddToggle("Auto Farm Orb Black", {
-    Title = "Auto Farm Blackbeard", 
-    Default = false, 
-    Description = "Auto Farm | Farm Orb | Farm Boss",
-    Callback = function(AutoFarmOrb) 
-        _G.Aizen = AutoFarmOrb
+
+local Digger = Tabs.Item:AddSection("| Auto Farm")  
+
+Digger:AddToggle("Auto Dig", {
+    Title = "Auto Dig | Auto Crab",
+    Default = false,
+    Callback = function(puthai)
+        _G.Crab = puthai
     end
 })
 
-function TP(CFrame)
-    pcall(function()
-        local humanoidRootPart = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            humanoidRootPart.CFrame = CFrame
-        else
-            wait(2)
+
+
+spawn(function()
+if _G.Crab then
+while task.wait() do
+    for _,v in pairs(Workspace.Miner:GetDescendants()) do
+        if v.ClassName == "ProximityPrompt" then
+            fireproximityprompt(v,50)
+    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Shovel") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Shovel") then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(282.0632629394531, 45.07394027709961, -754.5389404296875)
+    else
+        for _,v in pairs(Workspace:GetDescendants()) do
+            if v.ClassName == "ProximityPrompt" then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(291.46942138671875, 43.46935272216797, -813.4340209960938)
+                    fireproximityprompt(v,50)
+            end
         end
-    end)
+    end
+end
+end
+end
+end
+end)
+
+
+
+
+
+Tabs.Event:AddToggle("Auto Farm Mahito", {
+    Title = "Auto Farm Mahito", 
+    Default = false, 
+    Description = "Auto Farm | Farm Orb | Farm Boss",
+    Callback = function(AutoFarmOrb) 
+        _G.Auto = AutoFarmOrb
+    end
+})
+
+
+while task.wait() do 
+    xpcall(function()
+        if workspace.Mob:FindFirstChild("Mahito") then 
+            local target = workspace.Mob:FindFirstChild("Mahito")
+            if target and target:FindFirstChild("HumanoidRootPart") and target:FindFirstChild("Humanoid") and target:FindFirstChild("Humanoid").Health > 0 then 
+                repeat task.wait()
+                    --script attack and other
+                    Attack()
+                    TP(v.HumanoidRootPart.CFrame*MethodFarm)
+                until not target.Parent or not target:FindFirstChild("HumanoidRootPart") or not target:FindFirstChild("Humanoid") or target:FindFirstChild("Humanoid").Health <= 0 or not _G.Auto
+            else
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1949.558349609375, 15.95364761352539, -423.34527587890625)
+            end
+        elseif workspace.NpcSpawnBoss:FindFirstChild("Mahito") and workspace.NpcSpawnBoss:FindFirstChild("Mahito"):FindFirstChild("Torso") and workspace.NpcSpawnBoss:FindFirstChild("Mahito"):FindFirstChild("Torso"):FindFirstChild("ProximityPrompt") then 
+             --เงื่อนไขแรกถ้ามีของมันจะวาปไปเสก
+            if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Orb Curse") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Orb Curse") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1949.558349609375, 15.95364761352539, -423.34527587890625)
+                task.wait(0.3)
+                local prompt = workspace.NpcSpawnBoss:FindFirstChild("Mahito").Torso
+                fireproximityprompt(prompt.ProximityPrompt)
+                task.wait(0.3)    
+            --เช็คเงื่อนไขสองถ้าเงื่อนไขแรกไม่ถูกมันจะเอาของออกมาทำให้เงื่อนไขแรกถูกละวาปไปเสก 
+            elseif game:GetService("Players").LocalPlayer.PlayerGui.HUD.Inventory.ScrollingFrameList:FindFirstChild("Orb Curse") and not (game:GetService("Players").LocalPlayer.Character:FindFirstChild("Orb Curse") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Orb Curse")) then
+                game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Inventory"):FireServer("Orb Curse") 
+                   --พอในตัวมีออฟจะตรงกับเงื่อนไขแรกแลล้วมันจะวาปเสก        
+                task.wait(1)
+            else
+                local target = workspace.Mob:FindFirstChild("Cursed Man")
+                if target and target:FindFirstChild("HumanoidRootPart") and target:FindFirstChild("Humanoid") and target:FindFirstChild("Humanoid").Health > 0 then 
+                    repeat task.wait()
+                        --script attack and other
+                        Attack()
+                        TP(v.HumanoidRootPart.CFrame*MethodFarm)
+                    until not target.Parent or not target:FindFirstChild("HumanoidRootPart") or not target:FindFirstChild("Humanoid") or target:FindFirstChild("Humanoid").Health <= 0 or not _G.Auto
+                else
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2, 20, 2322)
+                end
+            end
+            
+        else
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1949.558349609375, 15.95364761352539, -423.34527587890625)
+            task.wait(0.1)     
+        end
+    end,print)
 end
 
 
-local CFrameSpawn = CFrame.new(
-    -1951.80371, 15.9536476, -422.386139,
-    0.823755026, 8.34558112e-09, -0.566945851,
-    -5.21725685e-09, 1, 7.13972836e-09,
-    0.566945851, -2.92348501e-09, 0.823755026
-)
-
-spawn(function()
-    while task.wait() do
-        if _G.Aizen then
-            pcall(function()
-              local Player = game.Players.LocalPlayer
-                local backpack = Player.Backpack
-                  local mobs = game.Workspace.Mob:GetChildren()
-                local hasOrbBlack = backpack:FindFirstChild("Orb Black") ~= nil
-                if hasOrbBlack then
-                  task.wait(1)
-                    TP(CFrameSpawn)
-                    for _, H in ipairs(game:GetService("Workspace").NpcSpawnBoss:GetDescendants()) do
-                        if H:IsA("ProximityPrompt") then
-                            fireproximityprompt(H, 30)
-                        end
-                    end
-                  task.wait(1)
-                else
-                    for _, v in pairs(mobs) do
-                        if v.Name == "Blackbeard" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
-                            v.HumanoidRootPart.Transparency = 0.9
-                            v.Humanoid.WalkSpeed = 0
-                            v.Humanoid.JumpPower = 0
-                            repeat
-                                task.wait()
-                                EquipWeapon(_G.Weaponnn)
-                                Attack()
-                                TP(v.HumanoidRootPart.CFrame * MethodFarm)
-                            until not _G.Aizen or v.Humanoid.Health <= 0
-                        elseif v.Name == "ZombieXD" and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                            v.HumanoidRootPart.Size = Vector3.new(10, 10, 10)
-                            v.HumanoidRootPart.Transparency = 0.9
-                            v.Humanoid.WalkSpeed = 0
-                            v.Humanoid.JumpPower = 0
-                              repeat task.wait()
-                                Attack()
-                               EquipWeapon(_G.Weaponnn)
-                                TP(v.HumanoidRootPart.CFrame * MethodFarm)
-                           until not _G.Aizen or v.Humanoid.Health <= 0
-                        end
-                    end
-                end
-            end)
-        end
-    end
-end)
 Tabs.Skill:AddToggle("Z", {
       Title = "Z", 
       Default = false, 
@@ -853,11 +888,15 @@ spawn(function()
         end)
     end)
 end)
+
+
+
+if BB then
 end
 
-if JUD then
+if RY then
 local Window = Fluent:CreateWindow({
-	Title = "Jujutsu Legacy Premium Script",
+	Title = "Royal Sea Ulitmate Script",
 	SubTitle = "By > Dazzle Hub ",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(480, 370),
@@ -866,1001 +905,6 @@ local Window = Fluent:CreateWindow({
 	MinimizeKey = Enum.KeyCode.RightControl
 })
 
-
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "" }),
-    Misc = Window:AddTab({ Title = "Misc", Icon = "align-left" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
-
-
-Tabs.Main:AddToggle("Auto Farm Mode", {
-      Title = "Auto Farm Mode", 
-      Default = false, 
-      Callback = function(AutoFarmMode) 
-      _G.AutoFarmMode = AutoFarmMode
-  end})
-
-
-spawn(function()
-    while wait() do
-        if _G.AutoFarmMode then
-            pcall(function()
-                    for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v:IsA("Model") and v.Humanoid.Health > 0 then
-                            v.HumanoidRootPart.Size = Vector3.new(10,10,10)
-                            v.HumanoidRootPart.Transparency = 0.9
-                            v.Humanoid.WalkSpeed = 0
-                            v.Humanoid.JumpPower = 0
-                            repeat
-                                task.wait()
-                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.Angles(math.rad(-90), 0, 0))
-                            until _G.AutoFarmMode == false or v.Humanoid.Health <= 0
-                        end
-                    end
-            end)
-        end
-    end
-end)
-
-
-
-
-Tabs.Main:AddToggle("Fast Attack", {
-      Title = "Fast Attack", 
-      Default = false, 
-      Callback = function(Att) 
-      _G.Att = Att
-  end})
-
-
-spawn(function()
-  pcall(function()
-  while true do 
-    wait(0.0001)
-    if _G.Att then 
-  		local args = {
-  		    [1] = "Hitbox",
-  		    [3] = game:GetService("Players").LocalPlayer.Backpack.Combat.HitboxSettings1.Server.Handler.MidHit,
-  		    [4] = 5,
-  		    [5] = Vector3.new(6, 7, 6),
-  		    [6] = false,
-  		    [7] = false
-  		}
-  		
-  		game:GetService("Players").LocalPlayer.Backpack.Combat.HitboxSettings1.Server:FireServer(unpack(args))
-  		wait(0.001)
-    end
-end
-		end)
-end)
-
-
-
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").Stepped:Connect(function()
-            if _G.AutoFarmMode then
-                if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                    Noclip.Velocity = Vector3.new(0,0,0)
-                end
-            else    
-                if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-                end
-            end
-        end)
-    end)
-end)
-
-function TP(CFrame)
-    pcall(function()
-        local humanoidRootPart = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            humanoidRootPart.CFrame = CFrame
-        else
-            -- หากไม่พบ HumanoidRootPart (ผู้เล่นตาย) ก็รอให้โค้ดเกมทำงานอีกครั้ง
-            wait(1)
-        end
-    end)
-end
-
-Tabs.Main:AddToggle("Z", {
-      Title = "Z", 
-      Default = false, 
-      Callback = function(Z) 
-      _G.Z = Z
-  end})
-
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.Z then
-game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("X", {
-      Title = "X", 
-      Default = false, 
-      Callback = function(X) 
-      _G.X = X
-  end})
-
-   
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.X then
-game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("C", {
-      Title = "C", 
-      Default = false, 
-      Callback = function(C) 
-      _G.C = C
-  end})
-
-    
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.C then
-game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("V", {
-      Title = "V", 
-      Default = false, 
-      Callback = function(V) 
-      _G.V = V
-  end})
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.V then
-game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
-
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("A", {
-      Title = "A", 
-      Default = false, 
-      Callback = function(A) 
-      _G.A = A
-  end})
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.A then
-game:service('VirtualInputManager'):SendKeyEvent(true, "A", false, game)
-
-end
-end
-end)
-end)
-
-
-
-
---Misc
-
-Tabs.Misc:AddToggle("Anti AFK", {
-      Title = "Anti AFK", 
-      Default = true, 
-      Callback = function(cbx) 
-      _G.AntiAFKEnabled = cbx
-      		local vu = game:GetService("VirtualUser")
-          game.Players.LocalPlayer.Idled:connect(function()
-              if _G.AntiAFKEnabled then
-                  vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                  wait(1)
-                  vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                  end
-            end)
-  end})
-
-
-Tabs.Misc:AddToggle("White Screen", {
-      Title = "White Screen", 
-      Default = false, 
-      Callback = function(cb) 
-      _G.White_Screen = cb
-  end})
-
-
-spawn(function()
-    while true do
-        wait()
-      
-        if _G.White_Screen then
-            game:GetService("RunService"):Set3dRenderingEnabled(false)
-        else
-            game:GetService("RunService"):Set3dRenderingEnabled(true)
-        end
-    end
-end)
-
-Tabs.Misc:AddButton({
-    Title = "Boost FPS",
-    Description = "",
-    Callback = function()
-      local decalsyeeted = true
-      			local g, w, l = game, game.Workspace, game.Lighting
-      			local t = w.Terrain
-      			sethiddenproperty(l, "Technology", 2)
-      			sethiddenproperty(t, "Decoration", false)
-      			t.WaterWaveSize, t.WaterWaveSpeed, t.WaterReflectance, t.WaterTransparency = 0, 0, 0, 0
-      			l.GlobalShadows, l.FogEnd, l.Brightness = false, 9e9, 0
-      			Misc().Rendering.QualityLevel = "Level01"
-      		
-      			local function handleDescendant(v)
-      			if v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") or v:IsA("ShirtGraphic") then
-      			v:Remove()
-      			elseif v:IsA("BasePart") and not v:IsA("MeshPart") then
-      			v.Material, v.Reflectance = "Plastic", 0
-      			elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
-      			v.Transparency = 1
-      			elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-      			v.Lifetime = NumberRange.new(0)
-      			elseif v:IsA("Explosion") then
-      			v.BlastPressure, v.BlastRadius = 1, 1
-      			elseif (v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles")) then
-      			v.Enabled = false
-      			elseif v:IsA("MeshPart") and decalsyeeted then
-      			v.Material, v.Reflectance, v.TextureID = "Plastic", 0, 10385902758728957
-      			elseif v:IsA("SpecialMesh") and decalsyeeted then
-      			v.TextureId = 0
-      			end
-      			end
-      		
-      			for _, v in pairs(w:GetDescendants()) do
-      			handleDescendant(v)
-      			end
-      		
-      			w.DescendantAdded:Connect(function(v)
-      				wait()
-      				handleDescendant(v)
-      				end)
-      		
-      			for _, e in ipairs(l:GetChildren()) do
-      			if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
-      			e.Enabled = false
-      			end
-      			end
-    end
-    })
-
-
-Tabs.Misc:AddButton({
-    Title = "Unlock FPS",
-    Description = "",
-    Callback = function()
-      loadstring(game:HttpGet("https://pastebin.com/raw/y5reZYnG", true))()
-    end
-    })
-
-InterfaceManager:SetLibrary(Fluent)
-InterfaceManager:SetFolder("Dusk_Hub")
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-end
-
-if JU then 
-local Window = Fluent:CreateWindow({
-	Title = "Jujutsu Legacy Premium Script",
-	SubTitle = "By > Dazzle Hub",
-	TabWidth = 160,
-	Size = UDim2.fromOffset(480, 370),
-	Acrylic = false, 
-	Theme = "Crimson",
-	MinimizeKey = Enum.KeyCode.RightControl
-})
-
-local Tabs = {
-    Main = Window:AddTab({ Title = "Main", Icon = "gamepad-2" }),
-    Stats = Window:AddTab({ Title = "Stats", Icon = "align-end-horizontal" }),
-    Spin = Window:AddTab({ Title = "Spin", Icon = "flame" }),
-    Dungeon = Window:AddTab({ Title = "Dungeon", Icon = "fingerprint" }),
-    Misc = Window:AddTab({ Title = "Misc", Icon = "align-left" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
-}
-
-function Lv()
-  local Mylv = game:GetService("Players").LocalPlayer.Stats.Level.Value
-  if Mylv == 1 or Mylv <= 9 then
-    Mon = "Jujutsu Student"
-    CFrameQ = CFrame.new(-179.414551, 662.763245, -7674.85889, 0.251278102, -0, -0.967914939, 0, 1, -0, 0.967914939, 0, 0.251278102)
-  elseif Mylv == 10 or Mylv <= 24 then 
-    Mon = "Fly Head" 
-    CFrameQ = CFrame.new(234.855713, 663.698181, -7834.09082, -1, 0, 0, 0, 1, 0, 0, 0, -1)
-  elseif Mylv == 25 or Mylv <= 74 then 
-    Mon = "Mushroom" 
-    CFrameQ = CFrame.new(443.9375, 663.985962, -7401.05469, 0, 0, 1, 0, 1, -0, -1, 0, 0)
---[[  elseif Mylv == 50 or Mylv <= 74 then
-    Mon = "Plant Curse"
-    CFrameQ = CFrame.new(-271.4375, 662.398926, -6594.04053, 0, 0, -1, 0, 1, 0, 1, 0, 0)]]
-  elseif Mylv == 75 or Mylv <= 99 then 
-    Mon = "Feather Curse"
-    CFrameQ = CFrame.new(339.446045, 662.479248, -6799.05371, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-  elseif Mylv == 100 or Mylv <= 199 then Mon = "Big One"
-    CFrameQ = CFrame.new(-112.443848, 662.633118, -6975.77637, 0.766887188, -0, -0.641782045, 0, 1, -0, 0.641782045, 0, 0.766887188)
- --[[ elseif Mylv == 125 or Mylv <= 174 then
-    Mon = "Ugly Curse" 
-    CFrameQ = CFrame.new(283.376587, 659.232056, -4601.81055, 0, 0, 1, 0, 1, -0, -1, 0, 0)]]
-  --[[elseif Mylv == 150 or Mylv <= 174 then Mon = "Slime Curse" 
-    CFrameQ = CFrame.new(-454.696655, 658.843079, -4529.48193, 0, 0, -1, 0, 1, 0, 1, 0, 0)]]
-  --[[elseif Mylv == 175 or Mylv <= 199 then Mon = "Giant Curse" 
-    CFrameQ = CFrame.new(807.48999, 659.263733, -4865.35547, -0.683829784, 0, 0.729641616, 0, 1, 0, -0.729641616, 0, -0.683829784)]]
-  elseif Mylv == 200 or Mylv <= 249 then
-    Mon = "Finger Bearer" 
-    CFrameQ = CFrame.new(-176.069092, 659.167358, -5022.69629, 1, 0, 0, 0, 1, 0, 0, 0, 1)
-  elseif Mylv == 250 or Mylv <= 299 then
-    Mon = "Hanami" 
-    CFrameQ = CFrame.new(781.497681, 659.460693, -4506.28516, 0, 0, 1, 0, 1, -0, -1, 0, 0)
-  elseif Mylv == 300 or Mylv <= 349 then
-    Mon = "Choko"
-    CFrameQ = CFrame.new(-240.358521, 20.0355473, 197.463989, 0.818999946, -0, -0.57379359, 0, 1, -0, 0.57379359, 0, 0.818999946)
-  elseif Mylv == 350 or Mylv <= 399 then
-    Mon = "Mahite"
-    CFrameQ = CFrame.new(-479.50589, 20.0185585, 18.9458313, 0.680733144, 0, 0.732531607, 0, 1, 0, -0.732531607, 0, 0.680733144)
-  elseif Mylv == 400 or Mylv <= 449 then
-    Mon = "Jogo"
-    CFrameQ = CFrame.new(-168.068542, 25.4689388, -71.4958954, 0.114795089, 0, 0.993389189, 0, 1, 0, -0.993389189, 0, 0.114795089)
-  elseif Mylv == 450 or Mylv <= 499 then
-    Mon = "Kengaku"
-    CFrameQ = CFrame.new(-364.667297, 25.6621628, -122.991394, -0.432384014, 0, -0.901689529, 0, 1, 0, 0.901689529, 0, -0.432384014)
-  elseif Mylv == 500 or Mylv <= 549 then
-    Mon = "JudgeMan"
-    CFrameQ = CFrame.new(-11313.1816, -265.705444, 1487.71716, -0.723237038, 1.35315608e-08, -0.690599859, -9.44585854e-10, 1, 2.05831494e-08, 0.690599859, 1.55388271e-08, -0.723237038)
-  elseif Mylv == 550 or Mylv <= 599 then
-    Mon = "Zenin Leader"
-    CFrameQ = CFrame.new(-11479.1591796875, -265.66796875, 1238.016357421875)
-  elseif Mylv == 600 or Mylv <= 649 then
-    Mon = "Panda"
-    CFrameQ = CFrame.new(-11604.509765625, -265.7054748535156, 1666.2923583984375)
-  elseif Mylv == 650 or Mylv <= 699 then
-    Mon = "Reincarnated Sorcerer"
-    CFrameQ = CFrame.new(-12205.3974609375, -265.70550537109375, 1395.776123046875)
-  elseif Mylv == 700 or Mylv <= 749 then Mon = "Gambler"
-    CFrameQ = CFrame.new(-13111.1240234375, -265.7054443359375, 1639.7840576171875)
-  elseif Mylv == 750 or Mylv <= 799 then
-    Mon = "0 Energy"
-    CFrameQ = CFrame.new(-13239.798828125, -265.7054748535156, 1748.751708984375)
-  elseif Mylv == 800 or Mylv <= 899 then
-    Mon = "Yorozu"
-    CFrameQ = CFrame.new(-13665.5928, -266.063904, 2106.37305, -0.586336613, 0, 0.810067534, 0, 1, 0, -0.810067534, 0, -0.586336613)
-  elseif Mylv == 900 or Mylv <= 9999999 then
-    Mon = "Meguna"
-    CFrameQ = CFrame.new(-14104.8584, -264.654663, 2372.2771, 0.810063004, 0, 0.586342871, 0, 1, 0, -0.586342871, 0, 0.810063004)
-    end
-end
-
-Tabs.Main:AddToggle("Auto Farm", {
-      Title = "Auto Farm", 
-      Default = false, 
-      Callback = function(AutoFarm) 
-      _G.AutoFarm = AutoFarm
-  end})
-
-
-
-spawn(function()
-    while wait() do
-        if _G.AutoFarm then
-            pcall(function()
-              Lv()
-                if game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestNow.Visible == false then
-                  TP(CFrameQ)
-                  elseif game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestNow.Visible == true then
-                    for _, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == Mon and v.Humanoid.Health > 0 then
-                            v.HumanoidRootPart.Size = Vector3.new(10,10,10)
-                            v.HumanoidRootPart.Transparency = 0.9
-                            v.Humanoid.WalkSpeed = 0
-                            v.Humanoid.JumpPower = 0
-                            repeat
-                                task.wait()
-                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 6))
-                            until _G.AutoFarm == false or v.Humanoid.Health <= 0
-                        end
-                    end
-                end
-            end)
-        end
-    end
-end)
-
-Tabs.Main:AddToggle("Fast Attack", {
-      Title = "Fast Attack", 
-      Default = false, 
-      Callback = function(Att) 
-      _G.Att = Att
-  end})
-
-
-spawn(function()
-  pcall(function()
-  while true do 
-    wait(0.0001)
-    if _G.Att then 
-  		local args = {
-  		    [1] = "Hitbox",
-  		    [3] = game:GetService("Players").LocalPlayer.Backpack.Combat.HitboxSettings1.Server.Handler.MidHit,
-  		    [4] = 5,
-  		    [5] = Vector3.new(6, 7, 6),
-  		    [6] = false,
-  		    [7] = false
-  		}
-  		
-  		game:GetService("Players").LocalPlayer.Backpack.Combat.HitboxSettings1.Server:FireServer(unpack(args))
-  		wait(0.001)
-    end
-end
-		end)
-end)
-
-spawn(function()
-while wait() do
-if _G.AutoFarm then
-pcall(function()
-  if game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestNow.Visible == false then
-for i,v in pairs(game:GetService("Workspace").Npc:GetDescendants()) do
-if v.Name == "ProximityPrompt" then
-fireproximityprompt(v,30)
-end
-end
-end
-end)
-end
-end
-end)
-
-
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.AutoFarm then
-                for i2, v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
-                    if string.find(v.Name, "QuestGui") then
-                        v.Frame.QuestSelect.Quest1.Position = UDim2.new(0, -800, 0, -700)
-                        v.Frame.QuestSelect.Quest1.Size = UDim2.new(5000, 5000, 5000, 5000)
-                        v.Frame.QuestSelect.Quest1.BackgroundTransparency = 1
-                        v.Frame.QuestSelect.Quest1.ImageTransparency = 1
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.AutoFarm then
-                for i2, v in pairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
-                    if string.find(v.Name, "QuestGui") then
-                        v.Frame.AccpetDeclineBtn.Accept.Position = UDim2.new(0, -800, 0, -700)
-                        v.Frame.AccpetDeclineBtn.Accept.Size = UDim2.new(5000, 5000, 5000, 5000)
-                        v.Frame.AccpetDeclineBtn.Accept.BackgroundTransparency = 1
-                        v.Frame.AccpetDeclineBtn.Accept.ImageTransparency = 1
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-spawn(function()
-  while true do 
-    wait()
-    if _G.AutoFarm then
-      if game:GetService("Players").LocalPlayer.PlayerGui.QuestGui.QuestNow.Visible == false then
-game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':ClickButton1(Vector2.new(851, 158), game:GetService("Workspace").Camera.CFrame)
-            end
-        end
-    end
-end)
-
-
---function
-
-spawn(function()
-    pcall(function()
-        game:GetService("RunService").Stepped:Connect(function()
-            if _G.AutoFarm then
-                if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    local Noclip = Instance.new("BodyVelocity")
-                    Noclip.Name = "BodyClip"
-                    Noclip.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    Noclip.MaxForce = Vector3.new(100000,100000,100000)
-                    Noclip.Velocity = Vector3.new(0,0,0)
-                end
-            else    
-                if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-                end
-            end
-        end)
-    end)
-end)
-
-function TP(CFrame)
-    pcall(function()
-        local humanoidRootPart = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            humanoidRootPart.CFrame = CFrame
-        else
-            -- หากไม่พบ HumanoidRootPart (ผู้เล่นตาย) ก็รอให้โค้ดเกมทำงานอีกครั้ง
-            wait(1)
-        end
-    end)
-end
-
-Tabs.Main:AddToggle("Z", {
-      Title = "Z", 
-      Default = false, 
-      Callback = function(Z) 
-      _G.Z = Z
-  end})
-
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.Z then
-game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("X", {
-      Title = "X", 
-      Default = false, 
-      Callback = function(X) 
-      _G.X = X
-  end})
-
-   
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.X then
-game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("C", {
-      Title = "C", 
-      Default = false, 
-      Callback = function(C) 
-      _G.C = C
-  end})
-
-    
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.C then
-game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("V", {
-      Title = "V", 
-      Default = false, 
-      Callback = function(V) 
-      _G.V = V
-  end})
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.V then
-game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
-
-end
-end
-end)
-end)
-
-Tabs.Main:AddToggle("A", {
-      Title = "A", 
-      Default = false, 
-      Callback = function(A) 
-      _G.A = A
-  end})
-
-
-spawn(function()
-    pcall(function()
-        while wait() do
-        if _G.A then
-game:service('VirtualInputManager'):SendKeyEvent(true, "A", false, game)
-
-end
-end
-end)
-end)
-
---Stats
-
-Tabs.Stats:AddSlider("Slider", {
-        Title = "Point",
-        Description = "Use Point",
-        Default = 5,
-        Min = 0,
-        Max = 100,
-        Rounding = 0,
-        Callback = function(Ve)
-            _G.Ve = Ve
-        end
-    })
-
-Tabs.Stats:AddButton({
-    Title = "ResetStats",
-    Callback = function()
-      game:GetService("Players").LocalPlayer.PlayerGui.Profile.Stats.ResetStats:FireServer()
-    end
-    })
-
-Tabs.Stats:AddToggle("UP Strength", {
-      Title = "UP Strength", 
-      Default = false, 
-      Callback = function(Value) 
-      _G.Strength = Strength
-  end})
-
-
-spawn(function()
-  pcall(function()
-    while wait() do
-      if _G.Strength then
-      local args = {
-          [1] = "Melee",
-          [2] = _G.Ve
-      }
-      
-      game:GetService("Players").LocalPlayer.PlayerGui.Profile.Stats.Power:FireServer(unpack(args))
-      end
-    end
-  end)
-end)
-
-Tabs.Stats:AddToggle("UP Defense", {
-      Title = "UP Defense", 
-      Default = false, 
-      Callback = function(Defense) 
-      _G.Defense = Defense
-  end})
-
-
-spawn(function()
-  pcall(function()
-    while wait() do
-      if _G.Defense then
-      local args = {
-          [1] = "Defensive",
-          [2] = _G.Ve
-      }
-      
-      game:GetService("Players").LocalPlayer.PlayerGui.Profile.Stats.Power:FireServer(unpack(args))
-      end
-    end
-  end)
-end)
-
-Tabs.Stats:AddToggle("UP Sword", {
-      Title = "UP Sword", 
-      Default = false, 
-      Callback = function(Sword) 
-      _G.Sword = Sword
-  end})
-
-
-spawn(function()
-  pcall(function()
-    while wait() do
-      if _G.Sword then
-      local args = {
-          [1] = "Sword",
-          [2] = _G.Ve
-      }
-      
-      game:GetService("Players").LocalPlayer.PlayerGui.Profile.Stats.Power:FireServer(unpack(args))
-      end
-    end
-  end)
-end)
-
-Tabs.Stats:AddToggle("UP Cursed Energy", {
-      Title = "UP Cursed Energy", 
-      Default = false, 
-      Callback = function(CursedEnergy) 
-      _G.CursedEnergy = CursedEnergy
-  end})
-
-
-spawn(function()
-  pcall(function()
-    while wait() do
-      if _G.CursedEnergy then
-      local args = {
-          [1] = "Ability",
-          [2] = _G.Ve
-      }
-      
-      game:GetService("Players").LocalPlayer.PlayerGui.Profile.Stats.Power:FireServer(unpack(args))
-      end
-    end
-  end)
-end)
-
---Spin
-
-Tabs.Spin:AddDropdown("Select Set Race", {
-    Title = "Select Set Race",
-    Values = {"Fallen Angel"},
-    Multi = false,
-    Default = false,
-    Callback = function(Race)
-        _G.Race = Race
-    end
-})
-
-
-local Raceme = game.Players.LocalPlayer.RaceStat.RaceUSE.Value
-
-Tabs.Spin:AddButton({
-    Title = "Set Race",
-    Description = "",
-    Callback = function()
-      if _G.Race == "Fallen Angel" then
-      	local args = {
-      	      [1] = Raceme,
-      	      [2] = "Fallen Angel",
-      	      [3] = 1,
-      	      [4] = 0.001
-      	  }
-      	  
-      	  game:GetService("ReplicatedStorage").SetRace:FireServer(unpack(args))
-      end
-    end
-    })
-
-
-Tabs.Spin:AddDropdown("FarmModeSelect", {
-    Title = "Select Mode",
-    Values = {"Ten Shadows","Infinity","Deadly Sentencing","Rika","Jackpot"},
-    Multi = false,
-    Default = false,
-    Callback = function(Technique)
-        _G.Technique = Technique
-    end
-})
-
-local Pw = game.Players.LocalPlayer.Technique.Value
-
-Tabs.Spin:AddButton({
-    Title = "Set Technique",
-    Description = "",
-    Callback = function()
-      if _G.Technique == "Ten Shadows" then
-      local args = {
-          [1] = Pw,
-          [2] = "Ten Shadows",
-          [3] = 1,
-          [4] = 0.005
-      }
-      
-      game:GetService("ReplicatedStorage").SetTechnique:FireServer(unpack(args))
-      end
-      if _G.Technique == "Infinity" then 
-        local args = {
-          [1] = Pw,
-          [2] = "Infinity",
-          [3] = 1,
-          [4] = 0.01
-      }
-      
-      game:GetService("ReplicatedStorage").SetTechnique:FireServer(unpack(args))
-      end 
-      if _G.Technique == "Deadly Sentencing" then 
-        local args = {
-          [1] = Pw,
-          [2] = "Deadly Sentencing",
-          [3] = 1,
-          [4] = 0.01
-      }
-      
-      game:GetService("ReplicatedStorage").SetTechnique:FireServer(unpack(args))
-      end 
-      if _G.Technique == "Rika" then 
-        local args = {
-          [1] = Pw,
-          [2] = "Rika",
-          [3] = 1,
-          [4] = 0.01
-      }
-      
-      game:GetService("ReplicatedStorage").SetTechnique:FireServer(unpack(args))
-      end 
-      if _G.Technique == "Jackpot" then 
-        local args = {
-          [1] = Pw,
-          [2] = "Jackpot",
-          [3] = 1,
-          [4] = 0.01
-      }
-      
-      game:GetService("ReplicatedStorage").SetTechnique:FireServer(unpack(args))
-      end
-    end
-    })
-
---Dungeon
-
-Tabs.Dungeon:AddToggle("Join Dungeon", {
-      Title = "Join Dungeon", 
-      Default = false, 
-      Callback = function(JoinDungeon) 
-      _G.JoinDungeon = JoinDungeon
-  end})
-  
-
-spawn(function()
-  while wait() do 
-    if _G.JoinDungeon then 
-      TP(CFrame.new(-12747.3711, -266.36438, 1407.37488, 0.810063004, 0, 0.586342871, 0, 1, 0, -0.586342871, 0, 0.810063004))
-    end 
-  end 
-end)
-
---Misc
-
-Tabs.Misc:AddToggle("Anti AFK", {
-      Title = "Anti AFK", 
-      Default = true, 
-      Callback = function(cbx) 
-      _G.AntiAFKEnabled = cbx
-      		local vu = game:GetService("VirtualUser")
-          game.Players.LocalPlayer.Idled:connect(function()
-              if _G.AntiAFKEnabled then
-                  vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                  wait(1)
-                  vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                  end
-            end)
-  end})
-
-
-Tabs.Misc:AddToggle("White Screen", {
-      Title = "White Screen", 
-      Default = false, 
-      Callback = function(cb) 
-      _G.White_Screen = cb
-  end})
-
-
-spawn(function()
-    while true do
-        wait()
-      
-        if _G.White_Screen then
-            game:GetService("RunService"):Set3dRenderingEnabled(false)
-        else
-            game:GetService("RunService"):Set3dRenderingEnabled(true)
-        end
-    end
-end)
-
-Tabs.Misc:AddButton({
-    Title = "Boost FPS",
-    Description = "",
-    Callback = function()
-      local decalsyeeted = true
-      			local g, w, l = game, game.Workspace, game.Lighting
-      			local t = w.Terrain
-      			sethiddenproperty(l, "Technology", 2)
-      			sethiddenproperty(t, "Decoration", false)
-      			t.WaterWaveSize, t.WaterWaveSpeed, t.WaterReflectance, t.WaterTransparency = 0, 0, 0, 0
-      			l.GlobalShadows, l.FogEnd, l.Brightness = false, 9e9, 0
-      			Misc().Rendering.QualityLevel = "Level01"
-      		
-      			local function handleDescendant(v)
-      			if v:IsA("Accessory") or v:IsA("Shirt") or v:IsA("Pants") or v:IsA("ShirtGraphic") then
-      			v:Remove()
-      			elseif v:IsA("BasePart") and not v:IsA("MeshPart") then
-      			v.Material, v.Reflectance = "Plastic", 0
-      			elseif (v:IsA("Decal") or v:IsA("Texture")) and decalsyeeted then
-      			v.Transparency = 1
-      			elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-      			v.Lifetime = NumberRange.new(0)
-      			elseif v:IsA("Explosion") then
-      			v.BlastPressure, v.BlastRadius = 1, 1
-      			elseif (v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles")) then
-      			v.Enabled = false
-      			elseif v:IsA("MeshPart") and decalsyeeted then
-      			v.Material, v.Reflectance, v.TextureID = "Plastic", 0, 10385902758728957
-      			elseif v:IsA("SpecialMesh") and decalsyeeted then
-      			v.TextureId = 0
-      			end
-      			end
-      		
-      			for _, v in pairs(w:GetDescendants()) do
-      			handleDescendant(v)
-      			end
-      		
-      			w.DescendantAdded:Connect(function(v)
-      				wait()
-      				handleDescendant(v)
-      				end)
-      		
-      			for _, e in ipairs(l:GetChildren()) do
-      			if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
-      			e.Enabled = false
-      			end
-      			end
-    end
-    })
-
-
-Tabs.Misc:AddButton({
-    Title = "Unlock FPS",
-    Description = "",
-    Callback = function()
-      loadstring(game:HttpGet("https://pastebin.com/raw/y5reZYnG", true))()
-    end
-    })
-
-InterfaceManager:SetLibrary(Fluent)
-InterfaceManager:SetFolder("Dusk_Hub")
-InterfaceManager:BuildInterfaceSection(Tabs.Settings)
-end
-if RS then 
-local Window = Fluent:CreateWindow({
-	Title = "Royal Sea Premium Script",
-	SubTitle = "By > Dazzle Hub ",
-	TabWidth = 160,
-	Size = UDim2.fromOffset(480, 370),
-	Acrylic = false, 
-	Theme = "Dark",
-	MinimizeKey = Enum.KeyCode.RightControl
-})
 
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gamepad-2" }),
@@ -1950,32 +994,16 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function()
 end)
 
 
-
-Tabs.Main:AddToggle("Auto Attack", {
-      Title = "Auto Attack", 
-      Default = false, 
-      Callback = function(Attack) 
-      _G.Attack = Attack
-  end})
-
-
-spawn(function()
-	game:GetService("RunService").RenderStepped:Connect(function()
-		if _G.Attack then
-			pcall(function()
-				game:GetService('VirtualUser'):CaptureController()
-        game:GetService('VirtualUser'):Button1Down(Vector2.new(1280, 672))
-			end)
-		end
-	end)
-end)
-
 Tabs.Main:AddToggle("Auto Farm Level", {
       Title = "Auto Farm Level", 
       Default = false, 
       Callback = function(AutoFarmlv) 
       _G.AutoFarmlv = AutoFarmlv
-  end})
+    end})
+
+    local Monhahaaaa = {}
+
+
 
 Tabs.Main:AddToggle("Auto Skill X", {
       Title = "Auto Skill X", 
@@ -2133,7 +1161,6 @@ end
 end)
 
 
-
 function MAQ()
     local Lv = tonumber(string.match(game.Players.LocalPlayer.PlayerGui.Menu.ValueGui.LevelDisplay.Text, "%d+"))
     if Lv then
@@ -2186,11 +1213,29 @@ function MAQ()
     end
 end
 
-function A()
-    game:GetService('VirtualUser'):CaptureController()
-    game:GetService('VirtualUser'):Button1Down(Vector2.new(1280, 672))
+--- เธเธฑเธเน€เน€เธ”เธ
+_G.CheckQuestMAM = true
+
+function CheckQuest()
+    while _G.CheckQuestMAM do
+        MAQ()
+        wait(0.5)
+        local questBar = game:GetService("Players").LocalPlayer.PlayerGui.QuestBar
+        if questBar and questBar.Frame.Visible == true then
+            local NameMonnnn = questBar.NameMon.Value
+            if not string.find(NameMonnnn, Mon) then
+                local args = {
+                    [1] = game:GetService("Players").LocalPlayer
+                }
+                game:GetService("Players").LocalPlayer.PlayerGui.QuestBar.Frame.Close.LocalScript.RemoteEvent:FireServer(unpack(args))
+            end
+        end
+    end
 end
 
+function A()
+    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool"):Activate()
+end
 
 
 spawn(function()
@@ -2236,20 +1281,89 @@ spawn(function()
         end)
     end
 end)
+
+
 spawn(function()
     while true do
         if _G.AutoFarmlv then
             pcall(function()
-                for _,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+                for _, v in pairs(game:GetService("Workspace"):GetDescendants()) do
                     if v.Name == "ProximityPrompt" then
-                        fireproximityprompt(v,30)
+                        fireproximityprompt(v, 30)
                     end
                 end
             end)
         end
-        wait(0.5)
+        wait(0.5) 
     end
 end)
+
+
+local Players = game:GetService("Players")
+local Plr = Players.LocalPlayer
+local Character = Plr.Character or Plr.CharacterAdded:Wait()
+
+Plr.CharacterAdded:Connect(function(NewCharacter)
+    Character = NewCharacter
+end)
+
+local function AddInstantKill(Mob)
+    if Mob and Mob:IsA("Model") and Mob:FindFirstChildOfClass("Humanoid") then
+        if Mob:GetAttribute("InstantKill") == nil then
+            Mob:SetAttribute("InstantKill", true)
+
+            local function CheckKillConditions()
+                while true do
+                    if Mob:FindFirstChild("HittedPlayers"):FindFirstChild(Plr.Name) and
+                        (Mob.HumanoidRootPart.Position - Character.HumanoidRootPart.Position).Magnitude <= 15 then
+                        
+                        if isnetworkowner(Mob.HumanoidRootPart) or Mob:FindFirstChildOfClass("Humanoid").Health <= 0 then
+                            Mob:FindFirstChildOfClass("Humanoid").Health = 0
+                            break
+                        end
+                    end
+                    wait() 
+                end
+                
+                Mob:SetAttribute("InstantKill", nil) 
+                if Mob:FindFirstChildOfClass("Humanoid") and Mob:FindFirstChildOfClass("Humanoid").Health > 0 then
+                    AddInstantKill(Mob) 
+                end
+            end
+
+            coroutine.wrap(CheckKillConditions)() 
+        end
+    end
+end
+
+local function HandleNewModel(Thing)
+    if Thing:IsA("Model") and Thing:FindFirstChildOfClass("Humanoid") then
+        AddInstantKill(Thing)
+    end
+end
+
+workspace.Mon.DescendantAdded:Connect(HandleNewModel)
+
+workspace.Boss.ChildAdded:Connect(function(Boss)
+    if Boss:IsA("Model") and Boss:FindFirstChildOfClass("Humanoid") then
+        AddInstantKill(Boss)
+    end
+end)
+
+
+for _, v in pairs(workspace.Mon:GetDescendants()) do
+    if v:IsA("Model") and v:FindFirstChildOfClass("Humanoid") then
+        AddInstantKill(v)
+    end
+end
+
+for _, v in pairs(workspace.Boss:GetChildren()) do
+    if v:IsA("Model") and v:FindFirstChildOfClass("Humanoid") then
+        AddInstantKill(v)
+    end
+end
+
+
 
 --Event
 
@@ -2368,6 +1482,7 @@ end)
 
 
 
+
 spawn(function()
   pcall(function()
     while wait()  do
@@ -2424,6 +1539,12 @@ spawn(function()
 end)
 
 
+
+
+
+
+
+
 Tabs.Event:AddToggle("Auto Farm Shadow", {
       Title = "Auto Farm Shadow", 
       Description = "All 7 of them",
@@ -2468,7 +1589,7 @@ function TP(CFrame)
         if humanoidRootPart then
             humanoidRootPart.CFrame = CFrame
         else
-            -- หากไม่พบ HumanoidRootPart (ผู้เล่นตาย) ก็รอให้โค้ดเกมทำงานอีกครั้ง
+            -- เธซเธฒเธเนเธกเนเธเธ HumanoidRootPart (เธเธนเนเน€เธฅเนเธเธ•เธฒเธข) เธเนเธฃเธญเนเธซเนเนเธเนเธ”เน€เธเธกเธ—เธณเธเธฒเธเธญเธตเธเธเธฃเธฑเนเธ
             wait(1)
         end
     end)
@@ -2578,7 +1699,7 @@ spawn(function()
   while wait() do 
     if _G.Raid or _G.KillAura then
 if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("RaidTimeGui") then
-                            -- หากไม่มี ให้ย้ายผู้เล่นไปที่พิกัดที่ระบุ
+                            -- เธซเธฒเธเนเธกเนเธกเธต เนเธซเนเธขเนเธฒเธขเธเธนเนเน€เธฅเนเธเนเธเธ—เธตเนเธเธดเธเธฑเธ”เธ—เธตเนเธฃเธฐเธเธธ
                             game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrame.new(4102.5249, 20.3928604, 1239.33179, 0, 0, -1, 1, 0, 0, 0, -1, 0))
 end
 end
@@ -2603,6 +1724,7 @@ spawn(function()
         end
     end)
 end)
+
 
 
 
@@ -2664,6 +1786,92 @@ Tabs.Island:AddButton({
 
 
 --Misc
+
+local Monhahaaaa = {} 
+
+for _, v in pairs(workspace.Mon:GetDescendants()) do
+    if v:IsA("Model") and v:FindFirstChildOfClass("Humanoid") then
+        table.insert(Monhahaaaa, v.Name)
+    end
+end
+
+for _, v in pairs(workspace.Boss:GetChildren()) do
+    if v:IsA("Model") and v:FindFirstChildOfClass("Humanoid") then
+        table.insert(Monhahaaaa, v.Name)
+    end
+end
+
+
+local SelectMonu = Tabs.Misc:AddDropdown("SelectMon", {
+    Title = "Select Mon",
+    Values = Monhahaaaa,
+    Multi = false,
+    Default = false,
+    Callback = function(selected)
+        mONN = selected
+    end
+})
+
+Tabs.Misc:AddToggle("InstantKill", {
+    Title = "InstantKill", 
+    Default = false, 
+    Callback = function(CV) 
+        _G.AutoFarmDummy = CV
+    end
+})
+
+local Kill = Tabs.Misc:AddParagraph({
+    Title = "InstantKill Status",
+    Content = "Status: โ"
+})
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AutoFarmDummy == true then
+                Kill:SetDesc("Status: โ…")
+            else
+                Kill:SetDesc("Status: โ")
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        if _G.AutoFarmDummy then
+            pcall(function()
+                local Players = game:GetService("Players")
+                local LocalPlayer = Players.LocalPlayer
+
+                for _, v in pairs(workspace.Mon:GetDescendants()) do
+                    if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
+                        if v.Name == mONN then
+                            local function HittedMob(Mob)
+                                local HitFolder = Mob:FindFirstChild("HittedPlayers")
+                                return HitFolder and HitFolder:FindFirstChild(LocalPlayer.Name), Mob:FindFirstChildOfClass("Humanoid") or false
+                            end
+
+                            local Hitted, MobHUM = HittedMob(v)
+
+                            if Hitted and MobHUM then
+                                if MobHUM.Health > 0 and MobHUM.Parent.Name ~= LocalPlayer.Name then
+                                    wait(0.8)
+                                    MobHUM.Health = 0 
+                                    print("InstantKill Successful")
+                                else
+                                    print("You didn't hit Mon")
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
 
 Tabs.Misc:AddToggle("Anti AFK", {
       Title = "Anti AFK", 
@@ -2764,8 +1972,8 @@ InterfaceManager:SetLibrary(Fluent)
 InterfaceManager:SetFolder("Dusk_Hub")
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 end
+end
 if MM then
-
 local Window = Fluent:CreateWindow({
 	Title = "Meme Sea Dazzle Hub",
 	SubTitle = "",
